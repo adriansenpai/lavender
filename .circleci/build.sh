@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Cloning dependencies"
-git clone --depth=1 https://github.com/stormbreaker-project/android_kernel_xiaomi_lavender -b  oldcam-hmp  kernel
+git clone --depth=1 https://github.com/adriansenpai/lavender -b Keido-Kernel kernel
 cd kernel
 git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 git clone --depth=1 https://github.com/sohamxda7/AnyKernel3 AnyKernel
@@ -12,7 +12,7 @@ export CONFIG_PATH=$PWD/arch/arm64/configs/lavender-perf_defconfig
 PATH="${PWD}/clang/bin:$PATH"
 export ARCH=arm64
 export KBUILD_BUILD_HOST=circleci
-export KBUILD_BUILD_USER="sohamsen"
+export KBUILD_BUILD_USER="adriansenpai"
 # sticker plox
 function sticker() {
     curl -s -X POST "https://api.telegram.org/bot$token/sendSticker" \
@@ -25,7 +25,7 @@ function sendinfo() {
         -d chat_id="$chat_id" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=html" \
-        -d text="<b>• Predator-Stormbreaker Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Xiaomi Redmi Note7/7S</b> (lavender)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b>#Stable"
+        -d text="<b>• Keido Kernel •</b>%0ABuild started on <code>Circle CI</code>%0AFor device <b>Xiaomi Redmi Note7/7S</b> (lavender)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code>(master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b>#Stable"
 }
 # Push kernel to channel
 function push() {
@@ -59,7 +59,7 @@ function compile() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Predator-Stormbreaker-lavender-${TANGGAL}.zip *
+    zip -r9 Keido-Kernel-testbuild.zip *
     cd .. 
 }
 sticker
